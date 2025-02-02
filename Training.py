@@ -70,7 +70,7 @@ def backProp(X_batch, y_batch, Z1, Z2, W2):
 def update(W1, b1, W2, b2, W1loss, B1loss, W2loss, B2loss, learning_rate=0.01):
     learning_rate = 0.01
     W1 -= learning_rate * W1loss
-    b1 -= learning_rate * B1loss.flatten()  # Ensure correct shape
+    b1 -= learning_rate * B1loss.flatten()  # ensure shape
     W2 -= learning_rate * W2loss
     b2 -= learning_rate * B2loss.flatten()
     return W1, b1, W2, b2

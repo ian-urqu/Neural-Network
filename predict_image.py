@@ -1,7 +1,8 @@
 import numpy as np
-from PIL import Image
+import matplotlib.pyplot as plt
+from Loading import *
 
-# 1. Load saved weights
+
 weights = np.load("trained_model.npz")
 W1 = weights["W1"]
 b1 = weights["b1"]
@@ -29,23 +30,27 @@ def outputLayer(Z1, W2, b2):
     return softMax(Z2)
 
 
-def load_and_preprocess_image(file_path):
-    img = Image.open(file_path).convert("L")  # grayscale
-    img = img.resize((28, 28))
-    arr = np.array(img) / 255.0  # normalize
-    arr = arr.flatten().reshape(1, 784)  # (1, 784)
-    return arr
+X_train, y_train_enc, X_test, y_test_encoded = load_mnist_data()
 
 
-def predict_digit(file_path):
-    X = load_and_preprocess_image(file_path)
-    A1 = hiddenLayer(X, W1, b1)
-    A2 = outputLayer(A1, W2, b2)
-    return np.argmax(A2, axis=1)[0]
+# 1. Pick a random index
+idx = np.random.randint(0, X_train.shape[0])
 
+# 2. Extract the image and reshape to (28,28)
+random_img_2d = X_train[idx].reshape(28, 28)
 
-# Example usage
-if __name__ == "__main__":
-    digit_image = "test-digit-1.png"
-    pred = predict_digit(digit_image)
-    print(f"Predicted digit for {digit_image} is: {pred}")
+# 3. Get the true label from one-hot
+true_label = np.argmax(y_train_enc[idx])
+
+# 4. Display the random image
+plt.imshow(random_img_2d, cmap="gray")
+plt.title(f"True Label: {true_label}")
+plt.axis("off")
+plt.show()
+
+random_img_1d = X_train[idx].reshape(1, 784)
+A1 = hiddenLayer(random_img_1d, W1, b1)
+A2 = outputLayer(A1, W2, b2)
+predicted_label = np.argmax(A2)
+
+print(f"Predicted Label: {predicted_label}")
