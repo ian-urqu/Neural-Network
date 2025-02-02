@@ -21,12 +21,12 @@ def softMax(a):
 
 
 def hiddenLayer(X, W1, b1):
-    Z1 = np.dot(X, W1.T) + b1
+    Z1 = np.dot(X, np.transpose(W1)) + b1
     return ReLU(Z1)
 
 
 def outputLayer(Z1, W2, b2):
-    Z2 = np.dot(Z1, W2.T) + b2
+    Z2 = np.dot(Z1, np.transpose(W2)) + b2
     return softMax(Z2)
 
 
