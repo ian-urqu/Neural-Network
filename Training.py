@@ -8,9 +8,6 @@ X_train, y_train_enc, X_test, y_test_enc = load_mnist_data(
     "t10k-labels.idx1-ubyte",
 )
 
-print("Train Images shape:", X_train.shape)  # (60000, 784)
-print("Train Labels shape:", y_train_enc.shape)  # (60000, 10)
-
 
 # 1. Initialize weights and biases globally
 W1 = np.random.randn(800, 784) * 0.01

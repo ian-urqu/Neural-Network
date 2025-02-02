@@ -32,17 +32,13 @@ def outputLayer(Z1, W2, b2):
 
 X_train, y_train_enc, X_test, y_test_encoded = load_mnist_data()
 
-
-# 1. Pick a random index
 idx = np.random.randint(0, X_train.shape[0])
 
-# 2. Extract the image and reshape to (28,28)
 random_img_2d = X_train[idx].reshape(28, 28)
 
-# 3. Get the true label from one-hot
 true_label = np.argmax(y_train_enc[idx])
 
-# 4. Display the random image
+
 plt.imshow(random_img_2d, cmap="gray")
 plt.title(f"True Label: {true_label}")
 plt.axis("off")
